@@ -39,7 +39,25 @@ describe('POSTS', () => {
         expect(resAfterPatch.body.title).toEqual(data.title)
         expect(resAfterPatch.body).not.toEqual(resBeforePatch.body)
     });
-    it('Delete request for posts', async () => {
+    it('Put request for posts', async () => {
+        const data = {
+            title: 'New TITLE for put request',
+            newBody: 'FULLY NEW BODY after PUT REQUEST'
+        }
+        const resBeforePut = await request.get('/posts/1')
+        console.log(resBeforePut.body, '********** RESPONSE beforePut *********')
+        const resAfterPut = await request.put('/posts/1').send(data)
+        console.log(resAfterPut.body, '+++++++++++++++++ RESPONSE after put ++++++++++++++++')
 
+        expect(resAfterPut.statusCode).toEqual(200)
+        expect(resAfterPut.body.newBody).toEqual(data.newBody)
+        expect(resAfterPut.body.title).toEqual(data.title)
+        expect(resAfterPut.body).not.toEqual(resBeforePut.body)
+    });
+    it('Delete request for posts', async () => {
+       const res = await request.delete('/posts/1')
+        console.log(res.body, '======Response body======')
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toEqual({})
     });
 });
