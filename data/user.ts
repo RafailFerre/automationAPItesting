@@ -1,14 +1,15 @@
 import { faker } from '@faker-js/faker';
+import { User } from "./interface";
 
-let parol = createRandomUser().password
+let password = createRandomUser().password
 export const user = {
     "name": createRandomUser().username,
     "email": createRandomUser().email.toLowerCase(),
-    "password": parol,
-    "passwordConfirm": parol
+    "password": password,
+    "passwordConfirm": password
 }
 
-export function createRandomUser(){
+export function createRandomUser() : User {
     return {
         userId: faker.string.uuid(),
         username: faker.internet.userName(),

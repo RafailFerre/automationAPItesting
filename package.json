@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest specs/jsonPlaceholderTypiCode",
+    "test": "npx jest specs/jsonPlaceholderTypiCode/posts.spec.ts",
     "test1": "npx jest specs/tourProjectNode/userSignUp.spec.ts"
   },
   "keywords": [],

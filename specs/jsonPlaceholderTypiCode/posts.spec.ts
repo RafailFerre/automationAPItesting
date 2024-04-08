@@ -55,9 +55,49 @@ describe('POSTS', () => {
         expect(resAfterPut.body).not.toEqual(resBeforePut.body)
     });
     it('Delete request for posts', async () => {
-       const res = await request.delete('/posts/1')
+        const res = await request.delete('/posts/1')
         console.log(res.body, '======Response body======')
         expect(res.statusCode).toEqual(200)
         expect(res.body).toEqual({})
+    });
+    it('Patch request for posts VERSION 2', async () => {
+        const data = {
+            title: 'NEW TITLE AFTER PATCH VERSION 2'
+        }
+        const resBeforePatch = await request.get('/posts/1')
+        await request.patch('/posts/1')
+            .send(data)
+            .then((response) => {
+            console.log(response.body, '-----------------RESPONSE v2----------------')
+            expect(response.statusCode).toEqual(200)
+            expect(response.body.title).toEqual(data.title)
+            expect(response.body.title).not.toEqual(resBeforePatch.body.title)
+        })
+    });
+    it.only('Patch request for posts VERSION 3', (done) => {
+        const data = {
+            title: 'NEW TITLE AFTER PATCH VERSION 3'
+        }
+        let titleBeforePatch = null;
+        request
+            .get('posts/1')
+            .end((err, res) => {
+                if(err) return done(err)
+                titleBeforePatch = res.body.title
+                console.log(titleBeforePatch, '------ Title BEFORE PATCH --------')
+            });
+        request
+            .patch('/posts/1')
+            .send(data)
+            .expect(200)
+            .end((err, res) => {
+                if(err) return done(err)
+                console.log(titleBeforePatch, '------ Title BEFORE PATCH --------')
+                console.log(res.body, '-----------------RESPONSE VERSION 3----------------')
+                expect(res.statusCode).toEqual(200)
+                expect(res.body.title).toEqual(data.title)
+                expect(res.body.title).not.toBe(titleBeforePatch)
+                done()
+            });
     });
 });
