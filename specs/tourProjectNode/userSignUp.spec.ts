@@ -2,6 +2,8 @@ import * as supertest from "supertest";
 import { user } from "../../data/user";
 
 const request = supertest('http://localhost:8001/api/v1')
+
+
 describe('USER SIGN UP', () => {
     describe('POSITIVE TESTING', () => {
         it('Sign up with valid credentials', async () => {
