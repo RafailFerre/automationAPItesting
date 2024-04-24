@@ -3,10 +3,10 @@ import { user } from "./user";
 
 const request = supertest('localhost:8001/api/v1')
 
-export async function deleteUser(response: { headers: { [x: string]: any } }) {
+export async function deleteUser(cookie: string) {
     return request
         .delete('/users/deleteMe')
-        .set('Cookie', response.headers['set-cookie'])
+        .set('Cookie', cookie)
 }
 
 export async function loginUser(user: { email: string; password: string; }) {
