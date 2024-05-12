@@ -23,13 +23,13 @@ describe('USER SIGN UP', () => {
             expect(typeof res.body.token).toBe('string')
         });
     });
-    describe.only('NEGATIVE TESTING', () => {
+    describe('NEGATIVE TESTING', () => {
         it('Should not sign up new user with the same email', async () => {
             const res1 = await request.post('/users/signup').send(user).expect(201)
             console.log(res1.body, '***** Response body 1 *****')
             const res2 = await request.post('/users/signup').send(user)//.then(response => {
-            console.log(res2.body, '--------- Response body 2 ---------')
             console.log(user.email, '=========== email ==========')
+            console.log(res2.body, '--------- Response body 2 ---------')
             expect(res2.statusCode).toEqual(500)
             expect(res2.body.message).toBe(`E11000 duplicate key error collection: test.users index: email_1 dup key: { email: "${user.email}" }`)
             expect(res2.body.status).toBe('error')

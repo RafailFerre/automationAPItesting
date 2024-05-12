@@ -10,14 +10,16 @@ describe('USER SIGNUP AND LOGIN', () => {
             const res = await signUpUser(user)//.then(res => {
             console.log(user, '*-*-*-*-*-*-*-*-* USER *-*-*-*-*-*-*-*')
             console.log(res.body, '********** Response body **********')
-            console.log(res.header, '-------- HEADER -----------')
+            //console.log(res.header, '-------- HEADER -----------')
             expect(res.statusCode).toEqual(201)
             expect(res.body.data.user.name).toEqual(user.name)
             expect(res.body.data.user.email).toEqual(user.email)
             expect(res.header['content-type']).toEqual('application/json; charset=utf-8')
+            cookie = res.header['set-cookie']
+            console.log(cookie, '++++++++++++++ COOOOKKKIIE-----++++++++--')
             //})
 
-            cookie = await loginUser(user).then(res => {
+            await loginUser(user).then(res => {
                 console.log(res.body, '------------ Response Login -------------')
                 expect(res.statusCode).toEqual(200)
                 expect(res.body.status).toEqual('success')
@@ -25,7 +27,8 @@ describe('USER SIGNUP AND LOGIN', () => {
                 expect(res.body.data.user.email).toEqual(user.email)
                 expect(res.body.token).toBeDefined()
                 expect(res.header['content-type']).toEqual('application/json; charset=utf-8')
-                return res.header['set-cookie']
+                cookie = res.header['set-cookie']
+                console.log(cookie, '--------- COOOOKKKIIE-------')
             })
 
             await deleteUser(cookie).then(res => {
@@ -41,7 +44,7 @@ describe('USER SIGNUP AND LOGIN', () => {
             })
         });
     });
-    describe.only('NEGATIVE TESTING', () => {
+    describe('NEGATIVE TESTING', () => {
         let cookie: string;
         beforeEach(async () => {
             await signUpUser(user).then(res => {
