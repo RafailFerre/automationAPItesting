@@ -1,6 +1,6 @@
 import * as supertest from "supertest";
-import {user} from "../../data/user";
-import {signUpUser, loginUser, deleteUser} from "../../data/helpers";
+import {user} from "../../../data/user";
+import {signUpUser, loginUser, deleteUser} from "../../../data/helpers";
 
 const request = supertest('http://localhost:8001/api/v1')
 describe('USER SIGNUP AND LOGIN', () => {

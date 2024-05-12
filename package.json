@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "npx jest specs/jsonPlaceholderTypiCode/posts.spec.ts",
-    "test1": "npx jest specs/tourProjectNode/userSignUp.spec.ts",
-    "test2": "npx jest specs/tourProjectNode/userLogin.spec.ts"
+    "test1": "npx jest specs/tourProjectNode/user/userSignUp.spec.ts",
+    "test2": "npx jest specs/tourProjectNode/user/userLogin.spec.ts",
+    "test3": "npx jest specs/tourProjectNode/tour/createTour.spec.ts"
   },
   "keywords": [],
   "author": "",

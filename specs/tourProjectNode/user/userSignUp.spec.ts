@@ -1,5 +1,5 @@
 import * as supertest from "supertest";
-import { user } from "../../data/user";
+import { user } from "../../../data/user";
 
 const request = supertest('http://localhost:8001/api/v1')
 
